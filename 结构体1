@@ -1,0 +1,192 @@
+/*#include<stdio.h>
+//先在程序中自己建立一个结构体类型，包括有关学生信息各成员，然后用它来定义结构体变量，同时赋予初值(学生的信息)
+int main()
+{
+	struct Student
+	{
+		int num;
+		char name[20];
+		char sex;
+		char addr[20];
+	}a = {202030118,"Ma xinhong",'M',"FuYang"};
+	printf("学号:%d\nname:%s\nsex:%c\naddress:%s\n", a.num, a.name, a.sex, a.addr);
+	return 0;
+}*/
+/*#include<stdio.h>
+//定义两个相同的结构体变量
+//分别输入两个学生的学号，姓名，成绩
+//比较两个学生的成绩进行输出操作
+int main()
+{
+	struct Student
+	{
+		int num;
+		char name[20];
+		float score;
+	}student1,student2;
+	scanf("%d%s%f", &student1.num, student1.name, &student1.score);
+	scanf("%d%s%f", &student2.num, student2.name, &student2.score);
+		printf("The higher score is:\n");
+		if (student1.score > student2.score)
+		{
+			printf("%d %s %6.2f\n", student1.num, student1.name, student1.score);
+		}
+		else if (student1.score < student2.score)
+		{
+			printf("%d %s %6.2f\n", student2.num, student2.name, student2.score);
+		}
+		else
+		{
+			printf("%d %s %6.2f\n", student1.num, student1.name, student1.score);
+			printf("%d %s %6.2f\n", student2.num, student2.name, student2.score);
+		}
+	return 0;
+}*/
+/*#include<stdio.h>
+#include<string.h>
+//定义结构体数组
+//有三个候选人，每个选民只能投票选一人，要求编一个统计选票的程序，先后输入被选人的姓名，最后输出各得票结果
+struct Person
+{
+	char name[20];
+	int count;
+}leader[3] = { "Li",0,"Zhang",0,"Wang",0 };//定义全局的结构体数组leader
+int main()
+{
+	
+
+	char leader_name[20];
+	for (int i = 0; i < 10; i++)
+	{
+		scanf("%s", leader_name);
+		for (int j = 0; j < 3; j++)
+		{
+			if (strcmp(leader[j].name, leader_name) == 0)
+			{
+				leader[j].count++;
+			}
+		}
+	}
+	printf("\nResult:\n");
+	for (int i = 0; i < 3; i++)
+	{
+		printf("%5s:%d\n", leader[i].name, leader[i].count);
+	}
+	return 0;
+}*/
+/*#include<stdio.h>
+//有n个学生的信息(包括学号、姓名、成绩)，要求按照成绩的高低顺序来输出各学生的信息
+struct Student
+{
+	int num;
+	char name[20];
+	float score;
+};
+int main()
+{
+	struct Student stu[5] = { {10101,"Zhang",78.2},{10105,"Wang",98.5},{10102,"Li",86.7},{10108,"Ling",73.4},{10110,"Sun",100} };//定义结构体数组并初始化
+	struct Student temp;//定义结构体变量
+	int n = 5;
+	printf("The order is:\n");
+	for (int i = 0; i < n - 1; i++)//利用选择排序法进行比较
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (stu[i].score < stu[j].score)//
+			{
+				temp = stu[i];//将数组元素进行互换
+				stu[i] = stu[j];
+				stu[j] = temp;
+			}
+		}
+	}
+	for (int i = 0; i < n; i++)
+	{
+		printf("%4d%6s%6.2f\n", stu[i].num, stu[i].name, stu[i].score);
+	}
+	return 0;
+}*/
+//指向结构体变量的指针变量输出结构体变量中各成员的信息
+/*#include<stdio.h>
+#include<string.h>
+struct Student
+{
+	char name[20];
+	int num;
+	char sex;
+	float score;
+};
+int main()
+{
+	struct Student stu_1;
+	struct Student *p;
+	p = &stu_1;
+	stu_1.num = 10100;
+	strcpy(stu_1.name, "Li Ling");
+	stu_1.sex = 'M';
+	stu_1.score = 96.5;
+	printf("No.:%d\nname:%s\nsex:%c\nscore:%5.1f\n", p->num, p->name, p->sex, p->score);
+	return 0;
+}*/
+//指向结构体数组的指针变量
+/*#include<stdio.h>
+struct Student
+{
+	int num;
+	char name[20];
+	char sex;
+	int age;
+};
+struct Student stu[3] = { {10101,"Li Lin",'M',17},{10102,"Zhang Fang",'M',19},{10104,"Wang Min",'F',20} };
+int main()
+{
+	struct Student *p;
+	for (p = stu; p < stu + 3; p++)
+	{
+		printf("%5d%20s%2c%4d\n", p->num, p->name, p->sex, p->age);
+	}
+	return 0;
+}*/
+//用结构体变量和结构体变量的指针作函数的参数
+#include<stdio.h>
+#define N 3
+struct Student
+{
+	int num;
+	char name[20];
+	float score[3];
+	float aver;
+};
+void input(struct Student stud[])//用结构体数组接收实参传来的地址
+{
+	printf("请输入各学生的信息：学号、姓名、3门课成绩：\n");
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%d%s%f%f%f", &stud[i].num, stud[i].name, &stud[i].score[0], &stud[i].score[1], &stud[i].score[2]);
+		stud[i].aver = (stud[i].score[0] + stud[i].score[1] + stud[i].score[2]) / 3.0;
+	}
+}
+struct Student max(struct Student stu[])
+{
+	int m = 0;
+	for (int i = 1; i < N; i++)
+	{
+		if (stu[i].aver > stu[m].aver)
+			m = i;	
+	}
+	return stu[m];//返回的是该结构体数组包含的信息也就是数组元素
+	
+
+}
+void print(struct Student stud)//该函数形参为该结构体类型的变量
+{
+	printf("\n成绩最高的学生是：\n");
+	printf("学号：%d\n姓名：%s\n三门课成绩：%5.1f,%5.1f,%5.1f\n平均成绩：%5.2f\n", stud.num, stud.name, stud.score[0], stud.score[1], stud.score[2],stud.aver);
+}
+int main()
+{
+	struct Student stu[N],*p=stu;//定义结构体数组和指针
+	input(p);
+	print(max(p));
+	return 0;
+}
