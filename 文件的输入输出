@@ -1,0 +1,318 @@
+//#include<stdio.h>
+////顺序读写数据文件
+//#include<stdlib.h>
+//int main()
+//{
+//	FILE *fp;
+//	char ch, filename[10];
+//	printf("请输入所用名的文件名:");
+//	scanf("%s", filename);
+//	getchar();//将回车符消掉
+//	if ((fp = fopen(filename, "r")) == NULL)//判断文件是否为空
+//	{
+//		printf("cannot open file\n");
+//		exit(0);//终止程序的库函数
+//	}
+//	printf("请输入一个准备存储到磁盘的字符串(以#结束):");
+//	ch = getchar();//接收从键盘敲入的字符
+//	while (ch != '#')
+//	{
+//		fputc(ch, fp);//向磁盘文件输出一个字符
+//		putchar(ch);//输出显示在屏幕上
+//		ch = getchar();
+//	}
+//	fclose(fp);
+//	putchar(10);//输出一个换行符
+//	return 0;
+//}
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+//int main()
+//{
+	/*FILE *in, *out;
+	char str[81], *p = str;
+	char ch, infile[10], outfile[10];
+	printf("输入输出文件的名字:");
+	scanf("%s", outfile);
+	if ((out = fopen(outfile, "w")) == NULL)
+	{
+		printf("无法打开此文件\n");
+		exit(0);
+	}
+	getchar();
+	printf("请输入一个字符串:");
+	gets_s(str);
+	puts(str);
+	fputs(str, out);
+	fclose(out);
+
+
+
+*/
+//	FILE *in, *out;
+//	char ch, infile[81], outfile[81];
+//	printf("输入读入文件的名字:");
+//	scanf("%s", infile);
+//	printf("输入输出文件的名字:");
+//	scanf("%s", outfile);
+//	if ((in = fopen("infile", "r")) == NULL)
+//	{
+//		printf("无法打开此文件\n");
+//		exit(0);
+//	}
+//	if ((out = fopen("outfile", "w")) == NULL)
+//	{
+//		printf("无法打开此文件\n");
+//		exit(0);
+//	}
+//	ch = fgetc(in);
+//	while (!feof(in))//如果未遇到输入文件的结束标志
+//	{
+//		fputc(ch, out);//将ch放到输出文件中
+//		putchar(ch);//将ch显示到屏幕中
+//		ch = fgetc(in);//再从输入文件中读取一个字符放入ch中
+//	}
+//
+//	putchar(10);
+//	fclose(in);
+//	fclose(out);
+//	return 0;
+//}
+//#include<stdio.h>
+//#include<errno.h>
+//#include<string.h>
+//int main()
+//{
+//	FILE *pfread = fopen("file.txt", "r");//文件输入流，文件输出流
+//	if (pfread == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 0;
+//	}
+//	//写文件
+//	/*fputc('b', pf);
+//	fputc('i', pf);
+//	fputc('t', pf);*/
+//	//读文件
+//		printf("%c", fgetc(pfread));
+//		printf("%c", fgetc(pfread));
+//		printf("%c", fgetc(pfread));
+//	//关闭文件
+//	fclose(pfread);
+//	pfread = NULL;
+//	return 0;
+//}
+//#include<stdio.h>
+//int main()
+//{
+//
+//	FILE *pf = fopen("stations.txt", "r");
+//	char buf[1024] = { 0 };
+//	if (pf == NULL)
+//	{
+//		return 0;
+//	}
+//	while (pf != NULL)
+//	{
+//		fgets(buf, 1024, pf);
+//		printf("%s", buf);
+//	}
+//	
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0;
+//}
+/*#include<stdio.h>
+int main() 
+{
+	//FILE *pf = fopen("file.txt", "w");
+	//if (pf == NULL)
+	//{
+	//	return 0;
+	//}
+	////利用fputs函数写文件
+	//fputs("hello", pf);
+	//fputs("world", pf);
+	//fclose(pf);
+	//pf = NULL;
+
+	char buf[1024] = { 0 };
+	//fgets(buf, 1024, stdin);//文本行输入函数 从标准输入流中读取
+	//fputs(buf,stdout);//文本行输出函数 输出到标准输出流
+	gets_s(buf);//读取
+	puts(buf);//输出
+	return 0;
+}*/
+/*#include<stdio.h>
+//从键盘中读取若刚干个字符串，对他们按字母大小的顺序排序，然后把排好序的字符串送到磁盘文件中保存
+struct S
+{
+	int n;
+	float score;
+	char arr[20];
+};
+int main()
+{
+	struct S s = { 0 };
+	FILE *pf = fopen("file.txt", "r");//读取文件
+	if (pf == NULL)
+	{
+		return 0;
+	}
+	//格式化的形式写文件 
+	//fprintf(pf,"%d %f %s", s.n, s.score, s.arr);
+	//格式化的输入数据
+	fscanf(pf, "%d %f %s", &s.n, &s.score, s.arr);//从文件中读取
+	printf("%d %f %s", s.n, s.score, s.arr);
+
+	fclose(pf);
+	pf = NULL;
+	return 0;
+}*/
+
+/*#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+int main()
+{
+	FILE *pf;
+	char str[3][10], temp[10];
+	printf("Enter strings:\n");
+	int n = 3;
+	for (int i = 0; i < n; i++)//选择法排序
+	{
+		gets_s(str[i]);
+	}
+	for (int i = 0; i < n-1; i++)
+	{
+		for (int j = i + 1; j < n ; j++)
+		{
+			if (strcmp(str[i] , str[j])>0)
+			{
+				strcpy(temp, str[i]);
+				strcpy(str[i], str[j]);
+				strcpy(str[j], temp);
+			}
+		}
+	}
+
+	if ((pf = fopen("file1.txt", "w")) == NULL)
+	{
+		printf("can not open file!\n");
+		exit(0);
+	}
+	printf("The new Sequence:\n");
+	for (int i = 0; i < n; i++)
+	{
+		fputs(str[i], pf);
+		fputs("\n", pf);
+		printf("%s\n", str[i]);
+	}
+	return 0;
+}*/
+//#include<stdio.h>
+//#include<stdlib.h>
+//#define SIZE 1
+////从键盘中输入十个学生的数据，然后把它们存储到磁盘文件中去
+//struct Student_type
+//{
+//	char name[10];
+//	int age;
+//	int num;
+//	char addr[15];
+//}Stud[SIZE];
+//int main()
+//{
+//	FILE *fp;
+//	if ((fp = fopen("file2.txt", "rb")) == NULL)
+//	{
+//		printf("cannot open file\n");
+//		exit(0);
+//	}
+//	for (int i = 0; i < SIZE; i++)
+//	{
+//		fread(&Stud[i], sizeof(struct Student_type), 1, fp);
+//		printf("%-10s%4d%4d%-15s\n", Stud[i].name, Stud[i].age, Stud[i].num, Stud[i].addr);
+//	}
+//	fclose(fp);
+//	
+//	return 0;
+//}
+//zhang 18 2001 room_4
+//zhang 18 2001 room_4
+//zhang 18 2001 room_4
+//zhang 18 2001 room_4
+//zhang 18 2001 room_4
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//#define SIZE 10
+//struct Student_type
+//{
+//	char name[10];
+//	int age;
+//	int num;
+//	char addr[15];
+//}Stud[SIZE];
+//void save()
+//{
+//	FILE *fp;
+//	if ((fp = fopen("stu.dat", "wb")) == NULL)//为了输出数据打开一个二进制文件，建立新文件
+//	{
+//		printf("can not open file\n");
+//		return;
+//	}
+//	for (int i = 0; i < SIZE; i++)
+//	{
+//		if (fwrite(&Stud[i], sizeof(struct Student_type), 1, fp) != 1)
+//		{
+//			printf("file write error\n");
+//			fclose(fp);
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//
+//
+//	printf("Please enter data of students:\n");
+//	for (int i = 0; i < SIZE; i++)
+//	{
+//		scanf("%s%d%d%s", Stud[i].name, &Stud[i].age, &Stud[i].num, Stud[i].addr);
+//	}
+//	save();
+//
+//	return 0;
+//}
+//#include<stdio.h>
+//#include<stdlib.h>
+////随机读写数据文件
+////要求将1、3、5、7、9的数据进行输出
+//struct Student_type
+//{
+//	char name[10];
+//	int age;
+//	int num;
+//	char addr[15];
+//}Stud[10];
+//int main()
+//{
+//	FILE *fp;
+//	if ((fp = fopen("stu.dat", "rb")) == NULL)
+//	{
+//		printf("can not open file\n");
+//			exit(0);
+//	}
+//	for (int i = 0; i < 10; i += 2)
+//	{
+//		fseek(fp, i * sizeof(struct Student_type), 0);//移动文件位置标记查找
+//		fread(&Stud[i], sizeof(struct Student_type), 1, fp);
+//		printf("%-10s%4d%4d%-15s\n", Stud[i].name, Stud[i].age, Stud[i].num, Stud[i].addr);
+//	}
+//	fclose(fp);
+//	return 0;
+//}
+
